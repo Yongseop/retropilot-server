@@ -39,7 +39,11 @@ function simpleStringify(object) {
 
 
 function formatDate(timestampMs) {
-    return new Date(timestampMs).toISOString().replace(/T/, ' ').replace(/\..+/, '');
+//    return new Date(timestampMs).toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    
+    var date = new Date(timestampMs);
+    var isoDateTime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+    return isoDateTime.replace(/T/, ' ').replace(/\..+/, '');
 }
 
 

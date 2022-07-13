@@ -742,10 +742,10 @@ async function deleteBootAndCrashLogs() {
 
 
 async function mainWorkerLoop() {
-    if (Date.now()-startTime>60*60*1000) {
-        logger.info("EXIT WORKER AFTER 1 HOUR TO PREVENT MEMORY LEAKS...");
+/*    if (Date.now()-startTime>60*60*1000*24) {
+        logger.info("EXIT WORKER AFTER 24 HOUR TO PREVENT MEMORY LEAKS...");
         process.exit();
-    }
+    }*/
 
     try {
         if (Date.now()-lastCleaningTime>20*60*1000) {

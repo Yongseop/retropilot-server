@@ -66,23 +66,24 @@ const web = async () => {
 
 
     app.get('/', async (req, res) => {
-        res.status(200);
-        var response = '<html style="font-family: monospace"><h2>404 Not found</h2>' +
-            'Are you looking for the <a href="/useradmin">useradmin dashboard</a>?';
-        res.send(response);
+        // res.status(200);
+        // var response = '<html style="font-family: monospace"><h2>404 Not found</h2>' +
+        //     'Are you looking for the <a href="/useradmin">useradmin dashboard</a>?';
+        // res.send(response);
+        res.redirect('/useradmin')
     })
 
 
     app.get('*', runAsyncWrapper(async (req, res) => {
-        logger.error("HTTP.GET unhandled request: " + controllers.helpers.simpleStringify(req) + ", " + controllers.helpers.simpleStringify(res) + "")
-        res.status(400);
-        res.send('Not Implemented');
+        //logger.error("HTTP.GET unhandled request: " + controllers.helpers.simpleStringify(req) + ", " + controllers.helpers.simpleStringify(res) + "")
+        //res.status(400);
+        res.redirect('https://3secondz.com/404')
     }))
 
 
     app.post('*', runAsyncWrapper(async (req, res) => {
-        logger.error("HTTP.POST unhandled request: " + controllers.helpers.simpleStringify(req) + ", " + controllers.helpers.simpleStringify(res) + "")
-        res.status(400);
+        //logger.error("HTTP.POST unhandled request: " + controllers.helpers.simpleStringify(req) + ", " + controllers.helpers.simpleStringify(res) + "")
+        //res.status(400);
         res.send('Not Implemented');
     }));
 

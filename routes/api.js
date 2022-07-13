@@ -22,7 +22,7 @@ let logger;
 // DRIVE & BOOT/CRASH LOG FILE UPLOAD HANDLING
 router.put('/backend/post_upload', bodyParser.raw({
     inflate: true,
-    limit: '100000kb',
+    limit: '500MB',
     type: '*/*'
 }), runAsyncWrapper(async (req, res) => {
     var buf = new Buffer(req.body.toString('binary'), 'binary');
@@ -217,7 +217,7 @@ router.get('/v1/devices/:dongleId/owner', runAsyncWrapper(async (req, res) => {
 
 
 // DRIVE & BOOT/CRASH LOG FILE UPLOAD URL REQUEST
-router.get('/v1.3/:dongleId/upload_url/', runAsyncWrapper(async (req, res) => {
+router.get('/v1.4/:dongleId/upload_url/', runAsyncWrapper(async (req, res) => {
     var path = req.query.path;
     const dongleId = req.params.dongleId;
     const auth = req.headers.authorization;

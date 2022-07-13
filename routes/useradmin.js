@@ -55,7 +55,7 @@ router.get('/useradmin', runAsyncWrapper(async (req, res) => {
     const drives = await models.__db.get('SELECT COUNT(*) AS num, SUM(distance_meters) as distance, SUM(duration) as duration FROM drives');
 
     res.status(200);
-    res.send('<html style="font-family: monospace"><h2>Welcome To The RetroPilot Server Dashboard!</h2>' +
+    res.send('<html style="font-family: monospace"><h2>3SECONDZ Retropilot Dashboard</h2>' +
         `<br><br>
                 <h3>Login</h3>
                 ` + (req.query.status !== undefined ? '<u>' + htmlspecialchars(req.query.status) + '</u><br>' : '') + `
@@ -165,7 +165,7 @@ router.post('/useradmin/register/token', bodyParser.urlencoded({extended: true})
     }
 
     res.status(200);
-    res.send('<html style="font-family: monospace"><h2>Welcome To The RetroPilot Server Dashboard!</h2>' +
+    res.send('<html style="font-family: monospace"><h2>3SECONDZ Retropilot Dashboard</h2>' +
         `
                 <a href="/useradmin">< < < Back To Login</a>
                 <br><br>
@@ -194,7 +194,7 @@ router.get('/useradmin/register', runAsyncWrapper(async (req, res) => {
     }
 
     res.status(200);
-    res.send('<html style="font-family: monospace"><h2>Welcome To The RetroPilot Server Dashboard!</h2>' +
+    res.send('<html style="font-family: monospace"><h2>3SECONDZ Retropilot Dashboard</h2>' +
         `
                 <a href="/useradmin">< < < Back To Login</a>
                 <br><br>
@@ -216,7 +216,7 @@ router.get('/useradmin/overview', runAsyncWrapper(async (req, res) => {
 
     const devices = await models.__db.all('SELECT * FROM devices WHERE account_id = ? ORDER BY dongle_id ASC', account.id)
 
-    var response = '<html style="font-family: monospace"><h2>Welcome To The RetroPilot Server Dashboard!</h2>' +
+    var response = '<html style="font-family: monospace"><h2>3SECONDZ Retropilot Dashboard</h2>' +
 
         `<br><br><h3>Account Overview</h3>
                 <b>Account:</b> #` + account.id + `<br>
@@ -224,11 +224,11 @@ router.get('/useradmin/overview', runAsyncWrapper(async (req, res) => {
                 <b>Created:</b> ` + controllers.helpers.formatDate(account.created) + `<br><br>
                 <b>Devices:</b><br>
                 <table border=1 cellpadding=2 cellspacing=2>
-                    <tr><th>dongle_id</th><th>device_type</th><th>created</th><th>last_ping</th><th>storage_used</th></tr>
+                    <tr><th>장치명</th><th>장치 ID</th><th>생성일</th><th>마지막 통신 시각</th><th>저장공간 사용량</th></tr>
                 `;
 
     for (var i in devices) {
-        response += '<tr><td><a href="/useradmin/device/' + devices[i].dongle_id + '">' + devices[i].dongle_id + '</a></td><td>' + devices[i].device_type + '</td><td>' + controllers.helpers.formatDate(devices[i].created) + '</td><td>' + controllers.helpers.formatDate(devices[i].last_ping) + '</td><td>' + devices[i].storage_used + ' MB</td></tr>';
+        response += '<tr><td><a href="/useradmin/device/' + devices[i].dongle_id + '">' + devices[i].device_type + '</a></td><td>' + devices[i].dongle_id + '</td><td>' + controllers.helpers.formatDate(devices[i].created) + '</td><td>' + controllers.helpers.formatDate(devices[i].last_ping) + '</td><td>' + devices[i].storage_used + ' MB</td></tr>';
     }
     response += `</table>
                 <br>
@@ -372,7 +372,7 @@ router.get('/useradmin/device/:dongleId', runAsyncWrapper(async (req, res) => {
     }
 
 
-    var response = '<html style="font-family: monospace"><h2>Welcome To The RetroPilot Server Dashboard!</h2>' +
+    var response = '<html style="font-family: monospace"><h2>3SECONDZ Retropilot Dashboard</h2>' +
 
         `
                 <a href="/useradmin/overview">< < < Back To Overview</a>
@@ -435,7 +435,7 @@ router.get('/useradmin/device/:dongleId', runAsyncWrapper(async (req, res) => {
                 <a href="/useradmin/unpair_device/` + device.dongle_id + `" onclick="return confirm('Are you sure that you want to unpair your device? Uploads will be rejected until it is paired again.')">Unpair Device</a>
                 <br><br>
                 <hr/>
-                <a href="/useradmin/signout">Sign Out</a></html>`;
+                <a href="/useradmin/signout">Sign Out</a><br /><br /><img src="https://3secondz.com/img/renewal_index/3secondz_logo_colored.svg" border="0"></html>`;
 
     res.status(200);
     res.send(response);
@@ -555,7 +555,7 @@ router.get('/useradmin/drive/:dongleId/:driveIdentifier', runAsyncWrapper(async 
                     </style>
                 </head>
                 <body>
-                <h2>Welcome To The RetroPilot Server Dashboard!</h2>
+                <h2>3SECONDZ Retropilot Dashboard</h2>
                 <a href="/useradmin/device/` + device.dongle_id + `">< < < Back To Device ` + device.dongle_id + `</a>
                 <br><br><h3>Drive ` + drive.identifier + ` on ` + drive.dongle_id + `</h3>
                 <b>Drive Date:</b> ` + controllers.helpers.formatDate(drive.drive_date) + `<br>
@@ -702,7 +702,7 @@ router.get('/useradmin/drive/:dongleId/:driveIdentifier', runAsyncWrapper(async 
     response += `</table>
                 <br><br>
                 <hr/>
-                <a href="/useradmin/signout">Sign Out</a></body></html>`;
+                <a href="/useradmin/signout">Sign Out</a><br /><br /><img src="https://3secondz.com/img/renewal_index/3secondz_logo_colored.svg" border="0"></body></html>`;
 
     res.status(200);
     res.send(response);
